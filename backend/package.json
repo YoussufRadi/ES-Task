@@ -1,16 +1,51 @@
 {
   "name": "backend",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
+  "author": "Youssuf Radi",
+  "license": "ISC",
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js --exec babel-node",
+    "forever": "forever start -o out.log -e err.log -c node_modules/.bin/babel-node server.js",
+    "test": "NODE_ENV=test mocha --compilers js:babel-core/register ./*/*.spec.js",
+    "pretest": "eslint --ignore-path .gitignore .",
+    "precommit": "lint-staged",
+    "postcommit": "git update-index --again",
+    "generate": "node scripts/generate.js"
   },
   "dependencies": {
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "express": "~4.16.0",
-    "http-errors": "~1.6.2",
-    "jade": "~1.11.0",
-    "morgan": "~1.9.0"
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "6.18.0",
+    "babel-preset-stage-2": "6.18.0",
+    "babel-register": "6.18.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.0",
+    "dotenv": "^6.0.0",
+    "express": "^4.15.0",
+    "express-validation": "^0.4.5",
+    "forever": "^0.15.3",
+    "joi": "^7.3.0",
+    "jsonwebtoken": "^8.3.0",
+    "morgan": "^1.8.1",
+    "pg": "^7.4.3",
+    "qrcode": "^1.2.0",
+    "swagger-ui-express": "^3.0.9",
+    "yamljs": "^0.3.0",
+    "cors": "2.8.4"
+  },
+  "devDependencies": {
+    "lint-staged": "^4.0.3",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.11.0",
+    "prettier": "^1.5.3",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "eslint": "4.13.0",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-plugin-import": "2.8.0",
+    "should": "^13.2.1"
+  },
+  "engines": {
+    "node": "9.11.1"
   }
 }
