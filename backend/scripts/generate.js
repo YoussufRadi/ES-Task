@@ -4,12 +4,12 @@ const { exec } = require('child_process');
 const dir = process.argv[2];
 
 exec(
-  `mkdir ../${dir}; 
-   touch ../${dir}/controller.js;
-   touch ../${dir}/model.js;
-   touch ../${dir}/routes.js;
-   touch ../${dir}/test.spec.js;`,
-  (err) => {
+  `mkdir ../backend/${dir}; 
+   touch ../backend/${dir}/controller.js;
+   touch ../backend/${dir}/model.js;
+   touch ../backend/${dir}/routes.js;
+   touch ../backend/${dir}/test.spec.js;`,
+  err => {
     if (err) {
       console.log(err);
     }
