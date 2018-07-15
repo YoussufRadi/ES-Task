@@ -10,19 +10,19 @@
     </div>
     <ul class="list-unstyled components">
         <li [ngClass]="{'active': selected === 0}" (click)="setSelected(0)" *ngIf="authentication.isAuthenticated()">
-            <a routerLink="/login">
+            <a routerLink="/pannel">
                 <i class="fas fa-list-ul"></i>
                 <div [hidden]="switch">View</div>
             </a>
         </li>
         <li [ngClass]="{'active': selected === 1}" (click)="setSelected(1)" *ngIf="authentication.isAuthenticated()">
-            <a routerLink="/pannel">
+            <a routerLink="/pannel/add">
                 <i class="fas fa-plus"></i>
                 <div [hidden]="switch">Add</div>
             </a>
         </li>
         <li [ngClass]="{'active': selected === 2}" (click)="setSelected(2)" *ngIf="authentication.isAuthenticated()">
-            <a routerLink="/login">
+            <a routerLink="/pannel/edit">
                 <i class="fas fa-edit"></i>
                 <div [hidden]="switch">Edit</div>
             </a>

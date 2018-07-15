@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { PannelComponent } from "./pannel.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
+import { AddTodoComponent } from "./add-todo/add-todo.component";
 
 const routes: Routes = [
   {
@@ -13,6 +14,11 @@ const routes: Routes = [
     path: "dashboard",
     component: PannelComponent,
     children: [{ path: "", component: DashboardComponent }]
+  },
+  {
+    path: "add",
+    component: PannelComponent,
+    children: [{ path: "", component: AddTodoComponent }]
   }
 ];
 
