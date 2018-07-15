@@ -76,7 +76,7 @@ export class ResetPasswordComponent implements OnInit {
         })
         .catch(err => {
           console.log(err);
-          this.showError("Reset Password Failed", err.error.detail);
+          this.showError("Reset Password Failed", err);
         });
     }
   }

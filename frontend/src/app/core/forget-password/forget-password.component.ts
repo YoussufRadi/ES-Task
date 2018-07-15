@@ -59,7 +59,7 @@ export class ForgetPasswordComponent implements OnInit {
         })
         .catch(err => {
           console.log(err);
-          this.showError("Token Request Failed", err.error.detail);
+          this.showError("Token Request Failed", err);
         });
     }
   }

@@ -6,11 +6,11 @@ export class ApiManagerService {
   constructor(private http: HttpClient) {}
 
   register(data) {
-    return this.http.post("/api/auth/store/signup", data).toPromise();
+    return this.http.post("/api/auth/signup", data).toPromise();
   }
 
   login(data) {
-    return this.http.post("/api/auth/store/signin", data).toPromise();
+    return this.http.post("/api/auth/signin", data).toPromise();
   }
 
   reset(data) {
@@ -18,6 +18,22 @@ export class ApiManagerService {
   }
 
   forget(data) {
-    return this.http.post("/api/auth/forget/store", data).toPromise();
+    return this.http.post("/api/auth/forget", data).toPromise();
+  }
+
+  todos() {
+    return this.http.get("/api/todo").toPromise();
+  }
+
+  add(data, id) {
+    return this.http.get("/api/todo/" + id, data).toPromise();
+  }
+
+  edit(data, id) {
+    return this.http.get("/api/todo/" + id, data).toPromise();
+  }
+
+  delete() {
+    return this.http.delete("/api/todo").toPromise();
   }
 }

@@ -6,7 +6,8 @@ import {
   HttpEvent,
   HttpResponse,
   HttpErrorResponse,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpHeaders
 } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
@@ -21,12 +22,19 @@ export class ApiInterceptorService {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     //TODO Check Interceptor
-    const requestNew = request.clone({
-      // setHeaders: {
-      //   "x-access-token": this.auth.getToken()
-      // }
-    });
-    return next.handle(requestNew).pipe(
+    // const requestNew = request.clone({
+    // setHeaders: {
+    //   "x-access-token": this.auth.getToken()
+    // }
+    // });
+    if (this.auth.isAuthenticated())
+      request = request.clone({
+        headers: new HttpHeaders({
+          "Content-Type": "application/json",
+          "x-access-token": this.auth.getToken()
+        })
+      });
+    return next.handle(request).pipe(
       tap(
         (event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
