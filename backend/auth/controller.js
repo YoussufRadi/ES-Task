@@ -76,9 +76,7 @@ export const ensureAuthenticated = (req, res, next) => {
   if (!token) next({ status: 403, detail: 'No token provided!' });
   jwt.verify(token, config.jwtSecret, (err, decoded) => {
     if (err) next({ status: 401, detail: err.message });
-
     req.id = decoded.id;
-    req.model = decoded.model;
     next();
   });
 };
@@ -100,8 +98,6 @@ const findByEmail = (req, res, next) => {
 const generateResetToken = (req, res, next) => {
   crypto.randomBytes(20, (err, buffer) => {
     req.token = buffer.toString('hex');
-    console.log(req.token);
-
     next();
   });
 };

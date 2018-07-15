@@ -1,18 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
   const TodoItem = sequelize.define('TodoItem', {
+    complete: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    subject: DataTypes.STRING,
+    comment: DataTypes.STRING,
     date: DataTypes.DATE,
-    content: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    subject: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
-    comment: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
   });
   TodoItem.associate = models => {
     TodoItem.belongsTo(models.Users, {

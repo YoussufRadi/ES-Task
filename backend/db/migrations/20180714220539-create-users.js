@@ -33,15 +33,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      todoId: {
-        type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'Users',
-          key: 'id',
-          as: 'userId',
-        },
-      },
     }),
   down: (queryInterface /* , Sequelize */) => queryInterface.dropTable('Users'),
 };
