@@ -1,3 +1,34 @@
-<p>
-  add-todo works!
-</p>
+<form class="form-horizontal container" [formGroup]="addForm" (ngSubmit)="onFormSubmit()">
+  <div class="row register-header">
+    <div class="col-lg-8">
+      <h5>Add ToDo</h5>
+    </div>
+  </div>
+  <fieldset>
+    <div class="form-group col-lg-8">
+      <label for="inputSubject" class="control-label">Subject</label>
+      <input type="text" class="form-control" id="inputSubject" formControlName="subject">
+      <div class="text-danger" *ngIf="subject.invalid && subject.touched" class="col-sm-8 text-danger">
+        Subject required
+      </div>
+    </div>
+    <div class="form-group col-lg-8">
+      <label for="inputComment" class="control-label">Comment</label>
+      <input type="text" formControlName="comment" id="inputComment" class="form-control">
+      <div class="text-danger" *ngIf="(comment.invalid && comment.touched)" class="text-danger">
+        Comment Required
+      </div>
+    </div>
+    <div class="form-group col-lg-8">
+      <label for="inputDate" class="control-label">Date</label>
+      <input type="date" formControlName="date" name="bday" max="3000-12-31" min="1000-01-01" class="form-control">
+      <div class="text-danger" *ngIf="(date.invalid && date.touched)" class="text-danger">
+        Comment Required
+      </div>
+    </div>
+    <div class="form-group col-lg-8 submit-register">
+      <button type="submit" [disabled]="!addForm.valid" class="form-submit-button btn btn-primary">Add</button>
+    </div>
+
+  </fieldset>
+</form>

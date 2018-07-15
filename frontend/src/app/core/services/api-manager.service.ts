@@ -25,15 +25,15 @@ export class ApiManagerService {
     return this.http.get("/api/todo").toPromise();
   }
 
-  add(data, id) {
-    return this.http.get("/api/todo/" + id, data).toPromise();
+  add(data) {
+    return this.http.post("/api/todo", data).toPromise();
   }
 
   edit(data, id) {
-    return this.http.get("/api/todo/" + id, data).toPromise();
+    return this.http.patch("/api/todo/" + id, data).toPromise();
   }
 
-  delete() {
-    return this.http.delete("/api/todo").toPromise();
+  delete(id) {
+    return this.http.delete("/api/todo/" + id).toPromise();
   }
 }

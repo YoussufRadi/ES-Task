@@ -39,7 +39,16 @@ import { ApiInterceptorService } from "./services/api-interceptor.service";
     NotFoundComponent
   ],
   entryComponents: [TextModalComponent],
-  exports: [RouterModule, SidebarComponent, NgHttpLoaderModule],
+  exports: [
+    RouterModule,
+    SidebarComponent,
+    NgHttpLoaderModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    BootstrapModalModule,
+    HttpClientModule
+  ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [
     AuthenticationService,

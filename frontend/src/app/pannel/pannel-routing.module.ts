@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { PannelComponent } from "./pannel.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AddTodoComponent } from "./add-todo/add-todo.component";
+import { EditTodoComponent } from "./edit-todo/edit-todo.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
     path: "add",
     component: PannelComponent,
     children: [{ path: "", component: AddTodoComponent }]
+  },
+  {
+    path: "edit",
+    component: PannelComponent,
+    children: [{ path: "", component: EditTodoComponent }]
   }
 ];
 

@@ -10,7 +10,7 @@ import { ApiManagerService } from "../../core/services/api-manager.service";
   styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnInit {
-  users;
+  todos: any[];
   constructor(
     private api: ApiManagerService,
     private dialogService: DialogService
@@ -19,12 +19,12 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.api
       .todos()
-      .then(users => {
-        this.users = users;
+      .then((todos: any) => {
+        this.todos = todos.todos;
       })
       .catch(err => {
         console.log(err);
-        this.showError("Sign In Failed", err);
+        this.showError("Fetching Items Failed", err);
       });
   }
 
@@ -33,5 +33,21 @@ export class DashboardComponent implements OnInit {
       title: title,
       message: message
     });
+  }
+
+  delete(id) {
+    var index = this.todos.indexOf(id, 0);
+    if (index > -1) {
+      this.todos.splice(index, 1);
+    }
+    this.api
+      .delete(id.id)
+      .then(() => {
+        this.showError("Delete Item Succeded", "Item has been deleted");
+      })
+      .catch(err => {
+        console.log(err);
+        this.showError("Delete Item Failed", err);
+      });
   }
 }
