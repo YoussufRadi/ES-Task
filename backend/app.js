@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 // error handler
 /* eslint-disable no-unused-vars */
 app.use((err, req, res, next) => {
-  console.log(err);
+  // console.log(err);
 
   // set locals, only providing error in development
   res.locals.message = err.message;

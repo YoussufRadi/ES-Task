@@ -7,8 +7,9 @@
   "scripts": {
     "start": "nodemon server.js --exec babel-node",
     "forever": "forever start -o out.log -e err.log -c node_modules/.bin/babel-node server.js",
-    "test": "NODE_ENV=test mocha --compilers js:babel-core/register ./*/*.spec.js",
-    "pretest": "eslint --ignore-path .gitignore .",
+    "db:migrate": "sequelize db:migrate",
+    "pretest": "NODE_ENV=test eslint --ignore-path ../.gitignore . && NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate",
+    "test": "NODE_ENV=test sequelize db:seed && mocha --compilers js:babel-core/register ./*/*.spec.js",
     "precommit": "lint-staged",
     "postcommit": "git update-index --again",
     "generate": "node scripts/generate.js"
@@ -20,6 +21,7 @@
     "babel-register": "6.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.0",
+    "child-process-promise": "^2.2.1",
     "cors": "2.8.4",
     "dotenv": "^6.0.0",
     "express": "^4.15.0",
@@ -28,6 +30,8 @@
     "http-errors": "^1.6.3",
     "joi": "^7.3.0",
     "jsonwebtoken": "^8.3.0",
+    "lodash": "^4.17.10",
+    "lodash.map": "^4.6.0",
     "morgan": "^1.8.1",
     "nodemailer": "^4.6.7",
     "path": "^0.12.7",
@@ -37,6 +41,7 @@
     "sequelize": "^4.38.0",
     "sqlite3": "^4.0.1",
     "swagger-ui-express": "^3.0.9",
+    "test": "^0.6.0",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
