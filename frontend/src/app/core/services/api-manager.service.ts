@@ -21,6 +21,10 @@ export class ApiManagerService {
     return this.http.post("/api/auth/forget", data).toPromise();
   }
 
+  getItem(id) {
+    return this.http.get("/api/todo/" + id).toPromise();
+  }
+
   todos() {
     return this.http.get("/api/todo").toPromise();
   }

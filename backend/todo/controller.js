@@ -20,8 +20,9 @@ const getToDos = (req, res, next) => {
 
 const checkToDo = (req, res, next) => {
   getToDoItembyId(req.params.id)
-    .then(todos => {
-      if (!todos) next({ status: 404, detail: 'Invalid Id' });
+    .then(todo => {
+      if (!todo) next({ status: 404, detail: 'Invalid Id' });
+      req.todo = todo;
       next();
     })
     .catch(err => next({ status: 500, detail: err }));
@@ -46,6 +47,7 @@ const delToDos = (req, res, next) => {
 };
 
 export const listToDos = [ensureAuthenticated, getToDos];
+export const getById = [ensureAuthenticated, checkToDo];
 export const addToDo = [validate(validation.add), ensureAuthenticated, createNewToDos];
 export const editToDo = [validate(validation.edit), ensureAuthenticated, checkToDo, modifyToDos];
 export const deletToDo = [ensureAuthenticated, checkToDo, delToDos];

@@ -22,7 +22,7 @@ const routes: Routes = [
     children: [{ path: "", component: AddTodoComponent }]
   },
   {
-    path: "edit",
+    path: "edit/:id",
     component: PannelComponent,
     children: [{ path: "", component: EditTodoComponent }]
   }

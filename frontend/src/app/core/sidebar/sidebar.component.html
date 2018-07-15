@@ -21,12 +21,6 @@
                 <div [hidden]="switch">Add</div>
             </a>
         </li>
-        <li [ngClass]="{'active': selected === 2}" (click)="setSelected(2)" *ngIf="authentication.isAuthenticated()">
-            <a routerLink="/pannel/edit">
-                <i class="fas fa-edit"></i>
-                <div [hidden]="switch">Edit</div>
-            </a>
-        </li>
         <li [ngClass]="{'active': selected === 5}" (click)="setSelected(5)">
             <a routerLink="/login" [ngClass]="{'logout': authentication.isAuthenticated()}">
                 <i class="fas fa-user"></i>

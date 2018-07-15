@@ -19,7 +19,10 @@ export class SidebarComponent implements OnInit {
     });
   }
   ngOnInit() {
-    if (this.authentication.isAuthenticated()) this.account = "Logout";
+    if (this.authentication.isAuthenticated()) {
+      this.account = "Logout";
+      this.selected = 0;
+    }
   }
 
   isLoggedIn() {

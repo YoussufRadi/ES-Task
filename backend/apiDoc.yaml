@@ -197,7 +197,6 @@ paths:
       operationId: "showTodo"
       produces:
       - "application/json"
-      parameters:
       security:
         - x-access-token: [user]
       responses:
@@ -251,6 +250,35 @@ paths:
           description: "Permission Denied"
 
   todo/{id}:
+    get:
+      tags:
+      - "Todo"
+      summary: "Retrives a sing todo by id"
+      operationId: "showTodo"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Todo id to edit"
+        required: true
+        type: "integer"
+        format: "int64"      security:
+        - x-access-token: [user]
+      responses:
+        200:
+          description: "Todo"
+          schema:
+            type: "object"
+            properties:
+              todo:
+                type: "object"
+        400:
+          description: "Wrong User token Used"
+        401:
+          description: "Token expired or Malformed"
+        403:
+          description: "Permission Denied"
     patch:
       tags:
       - "Todo"

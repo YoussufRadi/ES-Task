@@ -20,7 +20,7 @@
                 </p>
                 <br>
                 <div style="display: flex; justify-content: space-between;">
-                    <i class="fas fa-edit hbotton"></i>
+                    <i class="fas fa-edit hbotton" [routerLink]="['/pannel/edit',todo.id]"></i>
                     <i class="fas fa-trash hbotton" (click)="delete(todo)"></i>
                 </div>
             </div>
