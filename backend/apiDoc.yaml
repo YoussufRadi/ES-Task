@@ -1,0 +1,257 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: es-task
+  description: "API Documentation"
+  contact:
+    email: "y.sameh1995@gmail.com"
+host: "localhost:3000"
+basePath: "/api"
+tags:
+- name: "Auth"
+  description: "Used for user to retrieve access token needed for further identification"
+schemes:
+- "http"
+paths:
+   
+  /auth/signin:
+    post:
+      tags:
+      - "Auth"
+      summary: "User Sign In"
+      description: "Returns a token for user to be used in further identification"
+      operationId: "userSignIn"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "2 Scenarios are allowed:
+                      - User email and password for sign in
+                      - service and id to sign in with"
+        required: true
+        schema:
+          $ref: "#/definitions/SignInService"
+      responses:
+        200:
+          description: "Successfully Logged In"
+          type: "object"
+          properties:
+            detail:
+              type: "string" 
+            auth:
+              type: "boolean"
+            token:
+              type: "string"
+        400:
+          description: "Bad request or Required fields not stated"
+        401:
+          description: "Wrong Username or Password used"
+        404:
+          description: "Service not found"
+        
+  /auth/signup:
+    post:
+      tags:
+      - "Auth"
+      summary: "User Sign Up"
+      description: "Creates a new user in the database"
+      operationId: "userSignUp"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User email, name and password to register"
+        required: true
+        schema:
+          $ref: "#/definitions/SignUp"
+      responses:
+        200:
+          description: "Successfully Signed Up"
+          schema:
+            $ref: "#/definitions/SuccessService"
+        400:
+          description: "Required fields not satisfied"
+        401:
+          description: "Wrong Username or Password used"
+        409:
+          description: "Email entered not available - already registered -"
+        
+  /auth/signup/{service}/{id}:
+    get:
+      tags:
+      - "Auth"
+      summary: "User Sign Up using an external service"
+      description: "Creates a new user in the database using an external service"
+      operationId: "userSignUpService"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "service"
+        description: "Service type used"
+        required: true
+        type: "string"
+        enum:
+          - 'facebook'
+          - 'gmail'
+      - name: "id"
+        in: "path"
+        description: "User id to register"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successfully Signed Up"
+          schema:
+            $ref: "#/definitions/SuccessService"
+        400:
+          description: "Required fields not satisfied"
+        401:
+          description: "Wrong Username or Password used"
+        409:
+          description: "Email entered not available - already registered -"
+
+ 
+  /auth/reset:
+    post:
+      tags:
+      - "Auth"
+      summary: "Resets password"
+      description: "Takes a token for reseting password and allows user to enter a new password"
+      operationId: "resetPassword"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Reset Token and new Password"
+        required: true
+        schema:
+          type: "object"
+          properties:
+            token:
+              type: "string"
+            password:
+              type: "string"
+      responses:
+        200:
+          description: "Password reset successfully"
+          schema:
+            $ref: "#/definitions/Success"
+        400:
+          description: "Required fields not satisfied"
+        403:
+          description: "Token expired"
+        404:
+          description: "Token is not correct"
+
+  /auth/forget:
+    post:
+      tags:
+      - "Auth"
+      summary: "Forget password"
+      description: "Issues a token for user to use in reseting password"
+      operationId: "forgetPassword"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Email to reset password"
+        required: true
+        schema:
+          type: "object"
+          properties:
+            email:
+              type: "string"
+              format: "email"
+      responses:
+        200:
+          description: "Mail for reset Sent Successfully"
+          schema:
+            $ref: "#/definitions/Success"
+        400:
+          description: "Required fields not satisfied"
+        404:
+          description: "Model or email not found"
+
+  
+definitions:
+  Success:
+    type: "object"
+    properties:
+      detail:
+        type: "string" 
+      success:
+        type: "boolean"
+  SuccessService:
+    type: "object"
+    properties:
+      detail:
+        type: "string" 
+      success:
+        type: "boolean"
+      token:
+        type: "string"
+  SignIn:
+    type: "object"
+    required:
+    - "email"
+    - "password"
+    properties:
+      email:
+        type: "string"
+        format: "email"
+      password:
+        type: "string"
+        format: "password"
+  SignInService:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+        format: "email"
+      password:
+        type: "string"
+        format: "password"
+      id:
+        type: "string"
+      service:
+        type: "string"
+        enum:
+          - 'facebook'
+          - 'gmail'
+  SignUp:
+    type: "object"
+    required:
+    - "email"
+    - "name"
+    - "password"
+    properties:
+      email:
+        type: "string"
+        format: "email"
+      name:
+        type: "string"
+      password:
+        type: "string"
+        format: "password"
+
+securityDefinitions:
+  x-access-token:
+    type: "apiKey"
+    in: header
+    name: "x-access-token"
+                
