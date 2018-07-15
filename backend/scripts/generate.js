@@ -8,6 +8,7 @@ exec(
    touch ../backend/${dir}/controller.js;
    touch ../backend/${dir}/model.js;
    touch ../backend/${dir}/routes.js;
+   touch ../backend/${dir}/validation.js;
    touch ../backend/${dir}/test.spec.js;`,
   err => {
     if (err) {

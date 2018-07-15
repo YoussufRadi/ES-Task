@@ -9,6 +9,7 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
+        unique: true,
       },
       password: {
         type: Sequelize.STRING,
@@ -18,9 +19,11 @@ module.exports = {
       },
       gmail: {
         type: Sequelize.STRING,
+        unique: true,
       },
       facebook: {
         type: Sequelize.STRING,
+        unique: true,
       },
       createdAt: {
         allowNull: false,
