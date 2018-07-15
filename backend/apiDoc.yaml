@@ -254,7 +254,7 @@ paths:
       tags:
       - "Todo"
       summary: "Retrives a sing todo by id"
-      operationId: "showTodo"
+      operationId: "showTodoID"
       produces:
       - "application/json"
       parameters:
@@ -263,7 +263,8 @@ paths:
         description: "Todo id to edit"
         required: true
         type: "integer"
-        format: "int64"      security:
+        format: "int64"      
+      security:
         - x-access-token: [user]
       responses:
         200:
