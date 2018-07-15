@@ -1,8 +1,12 @@
 import express from 'express';
-import { listToDos, addToDo, deletToDo, editToDo } from './controller';
+import { listToDos, addToDo, deletToDo, editToDo, getById } from './controller';
 import { mailScheduler, mailUsers, mailCreator, mailSender } from './mailgun';
 
 const router = express.Router();
+
+router.get('/:id', getById, (req, res) => {
+  res.status(200).json({ todo: req.todo });
+});
 
 router.get('/', listToDos, (req, res) => {
   res.status(200).json({ todos: req.todos });

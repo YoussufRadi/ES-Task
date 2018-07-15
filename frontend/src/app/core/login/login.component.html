@@ -1,0 +1,32 @@
+<form class="form-horizontal container" [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
+  <div class="row register-header">
+    <div class="col-lg-8">
+      <h5>Login</h5>
+    </div>
+  </div>
+  <fieldset>
+    <div class="form-group col-lg-8">
+      <label for="inputEmail" class="control-label">Email</label>
+      <input type="text" class="form-control" id="inputEmail" formControlName="email">
+      <div *ngIf="email.invalid && email.touched" class="col-sm-8 text-danger">
+        <p class="text-danger" *ngIf="email.errors?.pattern">Please enter a valid email</p>
+      </div>
+    </div>
+    <div class="form-group col-lg-8">
+      <label for="inputPassword" class="control-label">Password</label>
+      <input type="password" formControlName="password" id="inputPassword" class="form-control">
+      <div class="text-danger" *ngIf="(password.invalid && password.touched)" class="text-danger">
+        Password needs to be more than 8 characters
+      </div>
+    </div>
+    <div class="form-group col-lg-8 submit-register">
+      <button type="submit" [disabled]="!loginForm.valid" class="form-submit-button btn btn-primary">Sign in</button>
+      <div style="padding-top: 3%;">New User?
+        <u style="cursor: pointer;" routerLink="/register">Sign up</u>
+      </div>
+      <div style="padding-top: 1%;">
+        <u style="cursor: pointer;" routerLink="/forget">Forgot Password?</u>
+      </div>
+    </div>
+  </fieldset>
+</form>

@@ -10,6 +10,8 @@ basePath: "/api"
 tags:
 - name: "Auth"
   description: "Used for user to retrieve access token needed for further identification"
+- name: "Todo"
+  description: "Used for user to insert tasks"
 schemes:
 - "http"
 paths:
@@ -187,7 +189,168 @@ paths:
         404:
           description: "Model or email not found"
 
-  
+  /todo:
+    get:
+      tags:
+      - "Todo"
+      summary: "Retrives all user's todos"
+      operationId: "showTodo"
+      produces:
+      - "application/json"
+      security:
+        - x-access-token: [user]
+      responses:
+        200:
+          description: "Array of Todos"
+          schema:
+            type: "object"
+            properties:
+              products:
+                type: "array"
+        400:
+          description: "Wrong User token Used"
+        401:
+          description: "Token expired or Malformed"
+        403:
+          description: "Permission Denied"
+    post:
+      tags:
+      - "Todo"
+      summary: "Adds a Todo"
+      operationId: "addTodo"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Required Fields for a Product"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "subject"
+          - "comment"      
+          properties:
+            subject:
+              type: "string" 
+            comment:
+              type: "string"
+            date:
+              type: "date"
+      security:
+        - x-access-token: [user]
+      responses:
+        201:
+          description: "Todo Added Successfully"
+        400:
+          description: "Wrong Store token Used"
+        401:
+          description: "Token expired or Malformed"
+        403:
+          description: "Permission Denied"
+
+  todo/{id}:
+    get:
+      tags:
+      - "Todo"
+      summary: "Retrives a sing todo by id"
+      operationId: "showTodoID"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Todo id to edit"
+        required: true
+        type: "integer"
+        format: "int64"      
+      security:
+        - x-access-token: [user]
+      responses:
+        200:
+          description: "Todo"
+          schema:
+            type: "object"
+            properties:
+              todo:
+                type: "object"
+        400:
+          description: "Wrong User token Used"
+        401:
+          description: "Token expired or Malformed"
+        403:
+          description: "Permission Denied"
+    patch:
+      tags:
+      - "Todo"
+      summary: "Edits user's todo"
+      operationId: "edit todo"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Todo id to edit"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "Required Fields for a Todo"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "subject"
+          - "comment"      
+          properties:
+            subject:
+              type: "string" 
+            comment:
+              type: "string"
+            date:
+              type: "date"
+      security:
+        - x-access-token: [store]
+      responses:
+        204:
+          description: "Product Edited Successfully"
+        400:
+          description: "Wrong Store token Used"
+        401:
+          description: "Token expired or Malformed"
+        403:
+          description: "Permission Denied"
+        404:
+          description: "Product doesnot exist"
+    delete:
+      tags:
+      - "Todo"
+      summary: "Deletes a Todo"
+      operationId: "Todo Delete"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Todo id to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      security:
+        - x-access-token: [store]
+      responses:
+        204:
+          description: "Todo Deleted Successfully"
+        400:
+          description: "Wrong Store token Used"
+        401:
+          description: "Token expired or Malformed"
+        403:
+          description: "Permission Denied"
+        404:
+          description: "Todo doesnot exist"
+
 definitions:
   Success:
     type: "object"

@@ -1,0 +1,29 @@
+<div style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-content: space-between;">
+    <div *ngFor="let todo of todos">
+        <div class="column">
+            <div style="border-bottom: 1px solid #2d1dc1;padding: 5%; flex-grow: 0;flex-basis: 1;">
+                <p>
+                    <b>Id:</b>
+                    <a>{{todo.id}}</a>
+                </p>
+                <p>
+                    <b>subject:</b>
+                    <a>{{todo.subject}}</a>
+                </p>
+                <p>
+                    <b>Comment:</b>
+                    <a>{{todo.comment}}</a>
+                </p>
+                <p>
+                    <b>Date :</b>
+                    <a>{{todo.date | date}}</a>
+                </p>
+                <br>
+                <div style="display: flex; justify-content: space-between;">
+                    <i class="fas fa-edit hbotton" [routerLink]="['/pannel/edit',todo.id]"></i>
+                    <i class="fas fa-trash hbotton" (click)="delete(todo)"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

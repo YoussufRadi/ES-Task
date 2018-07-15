@@ -1,0 +1,31 @@
+<!-- Sidebar  -->
+<nav id="sidebar" [ngClass]="{'active': switch}">
+    <div class="arrow" (click)="toggle()">
+        <i [hidden]="switch" id="arrow" class="fas fa-angle-left"></i>
+        <i [hidden]="!switch" id="arrow" class="fas fa-angle-right"></i>
+    </div>
+
+    <div class="sidebar-header">
+        <h2>ES-Task</h2>
+    </div>
+    <ul class="list-unstyled components">
+        <li [ngClass]="{'active': selected === 0}" (click)="setSelected(0)" *ngIf="authentication.isAuthenticated()">
+            <a routerLink="/pannel">
+                <i class="fas fa-list-ul"></i>
+                <div [hidden]="switch">View</div>
+            </a>
+        </li>
+        <li [ngClass]="{'active': selected === 1}" (click)="setSelected(1)" *ngIf="authentication.isAuthenticated()">
+            <a routerLink="/pannel/add">
+                <i class="fas fa-plus"></i>
+                <div [hidden]="switch">Add</div>
+            </a>
+        </li>
+        <li [ngClass]="{'active': selected === 5}" (click)="setSelected(5)">
+            <a routerLink="/login" [ngClass]="{'logout': authentication.isAuthenticated()}">
+                <i class="fas fa-user"></i>
+                <div [hidden]="switch"> {{account}}</div>
+            </a>
+        </li>
+    </ul>
+</nav>
